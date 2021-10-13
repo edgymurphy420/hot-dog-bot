@@ -18,7 +18,7 @@ n_word_file_path = Path("n_words.json")
 if n_word_file_path.is_file():
     with open(n_word_file_path, 'r') as f:
         n_word_usages = json.load(f)
-n_word_regex_pattern = r'n+[i|1|l]+[g|6]+[e|3]+r+'
+n_word_regex_pattern = r'n+[i|1|l]+[g|6]+[e|3]+[r|2]+'
 n_word_regex = re.compile(n_word_regex_pattern)
 
 @client.event
