@@ -47,6 +47,9 @@ async def on_message(message):
             response = "Nobody has used the N word in this server since I had this feature added. hotdogbot is proud of you all."
             await message.channel.send(response)
 
+    if message.content.lower() == ',r based':
+        await message.channel.send(f"{random.randint(0, 100)}% based")
+
     if n_word_regex.search(message.content.lower().replace(" ", "")):
         usage = {
             "author": message.author.mention,
