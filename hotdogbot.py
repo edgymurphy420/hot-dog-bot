@@ -42,33 +42,7 @@ async def on_message(message):
                 response = f"At {usage['time']}, {usage['author']} said this in {usage['server']}:\n[...]{shortened_usage}[...]".replace("\n", "\n> ")
             else:
                 response = f"At {usage['time']}, {usage['author']} said this in {usage['server']}:\n{usage['content']}".replace("\n", "\n> ")
-            await message.channel.send(response)
-            """
-            if len(usage['content']) >= 3996:
-                response1 = f"At {usage['time']}, {usage['author']} said this in {usage['server']}:"
-                await message.channel.send(response1)
-                response2 = f"> {usage['content'][:1998]}"
-                await message.channel.send(response2)
-                response3 = f"> {usage['content'][1998:3996]}"
-                await message.channel.send(response3)
-                response4 = f"> {usage['content'][3996:]}"
-                await message.channel.send(response4)
-            elif len(usage['content']) >= 1998:
-                response1 = f"At {usage['time']}, {usage['author']} said this in {usage['server']}:"
-                await message.channel.send(response1)
-                response2 = f"> {usage['content'][:1998]}"
-                await message.channel.send(response2)
-                response3 = f"> {usage['content'][1998:]}"
-                await message.channel.send(response3)
-            elif len(usage['content']) >= 1850:
-                response1 = f"At {usage['time']}, {usage['author']} said this in {usage['server']}:"
-                await message.channel.send(response1)
-                response2 = f"> {usage['content']}"
-                await message.channel.send(response2)
-            else:
-                response = f"At {usage['time']}, {usage['author']} said this in {usage['server']}:\n{usage['content']}"
-                await message.channel.send(response)
-                """
+            await message.channel.send(response, allowed_mentions=discord.AllowedMentions.none())
         else:
             response = "Nobody has used the N word in this server since I had this feature added. hotdogbot is proud of you all."
             await message.channel.send(response)
