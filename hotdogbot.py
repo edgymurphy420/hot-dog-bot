@@ -57,10 +57,10 @@ async def on_message(message):
             "time": message.created_at.strftime("%H:%M:%S UTC, on %m/%d/%Y"),
             "server": message.guild.name
         }
-        if n_word_usages[message.guild.id]:
-            n_word_usages[message.guild.id].append(usage)
+        if str(message.guild.id) in n_word_usages[]:
+            n_word_usages[str(message.guild.id)].append(usage)
         else:
-            n_word_usages[message.guild.id] = [usage]
+            n_word_usages[str(message.guild.id)] = [usage]
         with open(n_word_file_path, 'w', encoding='utf-8') as f:
             json.dump(n_word_usages, f, ensure_ascii=False, indent=4)
 
