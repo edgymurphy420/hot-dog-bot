@@ -57,7 +57,7 @@ async def on_message(message):
             "time": message.created_at.strftime("%H:%M:%S UTC, on %m/%d/%Y"),
             "server": message.guild.name
         }
-        if str(message.guild.id) in n_word_usages[]:
+        if str(message.guild.id) in n_word_usages:
             n_word_usages[str(message.guild.id)].append(usage)
         else:
             n_word_usages[str(message.guild.id)] = [usage]
