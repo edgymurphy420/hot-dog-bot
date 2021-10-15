@@ -13,7 +13,7 @@ TOKEN = os.getenv('DISCORD_TOKEN')
 
 client = discord.Client()
 
-n_word_usages = []
+n_word_usages = {}
 n_word_file_path = Path("n_words.json")
 if n_word_file_path.is_file():
     with open(n_word_file_path, 'r') as f:
@@ -57,7 +57,10 @@ async def on_message(message):
             "time": message.created_at.strftime("%H:%M:%S UTC, on %m/%d/%Y"),
             "server": message.guild.name
         }
-        n_word_usages.append(usage)
+        if n_word_usages[message.guild.id]:
+            n_word_usages[message.guild.id].append(usage)
+        else:
+            n_word_usages[message.guild.id] = [usage]
         with open(n_word_file_path, 'w', encoding='utf-8') as f:
             json.dump(n_word_usages, f, ensure_ascii=False, indent=4)
 
