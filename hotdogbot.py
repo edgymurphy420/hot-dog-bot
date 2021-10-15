@@ -31,8 +31,8 @@ async def on_message(message):
         await message.channel.send(response)
 
     if message.content.lower() == ',r nword':
-        if n_word_usages:
-            usage = random.choice(n_word_usages)
+        if n_word_usages[str(message.guild.id)]:
+            usage = random.choice(n_word_usages[str(message.guild.id)])
             if len(usage['content']) >= 200:
                 all_usages = [m.start() for m in re.finditer(n_word_regex_pattern, usage['content'])]
                 first_usage_index = all_usages[0]
