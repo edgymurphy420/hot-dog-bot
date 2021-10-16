@@ -25,7 +25,7 @@ eight_ball_responses = [
     "It is certain, ",
     "Yes, ",
     "Most likely, ",
-    "kys ",
+    "you're question is cringe, kys ",
     "ur a retard ",
     "Don't count on it, ",
     "No, ",
