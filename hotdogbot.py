@@ -21,6 +21,17 @@ if n_word_file_path.is_file():
 n_word_regex_pattern = r'[n\s]+[i|1l\s]+[g6\s]+[e3\s]+[r2\s]+'
 n_word_regex = re.compile(n_word_regex_pattern)
 
+eight_ball_responses = [
+    "It is certain, ",
+    "Yes, ",
+    "Most likely, ",
+    "kys ",
+    "ur a retard ",
+    "Don't count on it, ",
+    "No, ",
+    "Not a chance, "
+]
+
 @client.event
 async def on_message(message):
     if message.author == client.user:
@@ -46,6 +57,10 @@ async def on_message(message):
         else:
             response = "Nobody has used the N word in this server since I had this feature added. hotdogbot is proud of you all."
             await message.channel.send(response)
+
+    if len(message.content.lower()) >= 8 and message.content.lower()[0:8] == ",r 8ball":
+        response = random.choice(eight_ball_responses) + str(message.author.name)
+        await message.channel.send(response)
 
     if 'based' in message.content.lower():
         await message.channel.send(f"{random.randint(0, 100)}% based")
