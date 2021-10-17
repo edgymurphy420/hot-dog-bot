@@ -18,7 +18,7 @@ n_word_file_path = Path("n_words.json")
 if n_word_file_path.is_file():
     with open(n_word_file_path, 'r') as f:
         n_word_usages = json.load(f)
-n_word_regex_pattern = r'[n\s]+[i|1l\s]+[g6\s]+[e3\s]+[r2\s]+'
+n_word_regex_pattern = r'n+[i|1l]+[g6]+[e3]+[r2]+'
 n_word_regex = re.compile(n_word_regex_pattern)
 
 eight_ball_responses = [
@@ -65,7 +65,7 @@ async def on_message(message):
     if 'based' in message.content.lower():
         await message.channel.send(f"{random.randint(0, 100)}% based")
 
-    if n_word_regex.search(message.content.lower().replace(" ", "")):
+    if n_word_regex.search(message.content.lower().replace(" ", "").replace("\n", "").replace("\t", "")):
         usage = {
             "author": message.author.mention,
             "content": message.content,
