@@ -29,7 +29,8 @@ eight_ball_responses = [
     "ur a retard ",
     "Don't count on it, ",
     "No, ",
-    "Not a chance, "
+    "Not a chance, ",
+    "ok, "
 ]
 
 @client.event
