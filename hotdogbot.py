@@ -65,6 +65,9 @@ async def on_message(message):
 
     if 'based' in message.content.lower():
         await message.channel.send(f"{random.randint(0, 100)}% based")
+        
+    if 'cringe' in message.content.lower():
+        await message.channel.send(f"{random.randint(0, 100)}% cringe")
 
     if n_word_regex.search(message.content.lower().replace(" ", "").replace("\n", "").replace("\t", "")):
         usage = {
