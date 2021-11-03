@@ -35,12 +35,26 @@ eight_ball_responses = [
 
 @client.event
 async def on_message(message):
-    if message.author == client.user:
+    if message.author == client.user or message.author.bot:
         return
 
     if message.content.lower() == ',r hotdog':
         response = "https://i.redd.it/w5as70kigbw61.jpg"
         await message.channel.send(response)
+
+    if n_word_regex.search(message.content.lower().replace(" ", "").replace("\n", "").replace("\t", "")):
+        usage = {
+            "author": message.author.mention,
+            "content": message.content,
+            "time": message.created_at.strftime("%H:%M:%S UTC, on %m/%d/%Y"),
+            "server": message.guild.name
+        }
+        if str(message.guild.id) in n_word_usages:
+            n_word_usages[str(message.guild.id)].append(usage)
+        else:
+            n_word_usages[str(message.guild.id)] = [usage]
+        with open(n_word_file_path, 'w', encoding='utf-8') as f:
+            json.dump(n_word_usages, f, ensure_ascii=False, indent=4)
 
     if message.content.lower() == ',r nword':
         if str(message.guild.id) in n_word_usages:
@@ -62,26 +76,13 @@ async def on_message(message):
     if len(message.content.lower()) >= 8 and message.content.lower()[0:8] == ",r 8ball":
         response = random.choice(eight_ball_responses) + str(message.author.name)
         await message.channel.send(response)
+        return
 
     if 'based' in message.content.lower():
         await message.channel.send(f"{random.randint(0, 100)}% based")
         
     if 'cringe' in message.content.lower():
         await message.channel.send(f"{random.randint(0, 100)}% cringe")
-
-    if n_word_regex.search(message.content.lower().replace(" ", "").replace("\n", "").replace("\t", "")):
-        usage = {
-            "author": message.author.mention,
-            "content": message.content,
-            "time": message.created_at.strftime("%H:%M:%S UTC, on %m/%d/%Y"),
-            "server": message.guild.name
-        }
-        if str(message.guild.id) in n_word_usages:
-            n_word_usages[str(message.guild.id)].append(usage)
-        else:
-            n_word_usages[str(message.guild.id)] = [usage]
-        with open(n_word_file_path, 'w', encoding='utf-8') as f:
-            json.dump(n_word_usages, f, ensure_ascii=False, indent=4)
 
 
 client.run(TOKEN)
