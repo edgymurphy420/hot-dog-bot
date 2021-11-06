@@ -83,6 +83,15 @@ async def on_message(message):
         
     if 'cringe' in message.content.lower():
         await message.channel.send(f"{random.randint(0, 100)}% cringe")
+        
+    if 'epic' in message.content.lower():
+        await message.channel.send(f"{random.randint(0, 100)}% epic")
+        
+    if message.content.lower() == ',r awoo':
+        response = "https://i.imgur.com/62OvjsB.jpg"
+        await message.channel.send(response)
+        
+        
 
 
 client.run(TOKEN)
