@@ -33,6 +33,13 @@ eight_ball_responses = [
     "ok, "
 ]
 
+src_messages = [
+    ",r src",
+    ",r source",
+    ",r sourcecode",
+    ",r source code"
+]
+
 @client.event
 async def on_message(message):
     if message.author == client.user or message.author.bot:
@@ -40,6 +47,10 @@ async def on_message(message):
 
     if message.content.lower() == ',r hotdog':
         response = "https://i.redd.it/w5as70kigbw61.jpg"
+        await message.channel.send(response)
+
+    if message.content.lower() in src_messages:
+        response = "https://github.com/edgymurphy420/hot-dog-bot"
         await message.channel.send(response)
 
     if n_word_regex.search(message.content.lower().replace(" ", "").replace("\n", "").replace("\t", "")):
