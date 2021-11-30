@@ -30,7 +30,8 @@ eight_ball_responses = [
     "Don't count on it, ",
     "No, ",
     "Not a chance, ",
-    "ok, "
+    "ok, ",
+    "what "
 ]
 
 src_messages = [
