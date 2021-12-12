@@ -4,6 +4,7 @@ import json
 from pathlib import Path
 import random
 import re
+import math
 
 import discord
 from dotenv import load_dotenv
@@ -97,7 +98,7 @@ async def on_message(message):
         await message.channel.send(f"{random.randint(0, 100)}% cringe")
 
     # grab retard role id
-    role = message.guild.get_role(919700088543137822)
+    role = message.guild.get_role(917583501526724638)
     if role in message.author.roles:
         # if author is a confirmed retard, roll .1 chance jingles will remind him
         if math.floor(random.random()*1001) == 1:
