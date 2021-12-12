@@ -96,5 +96,11 @@ async def on_message(message):
     if 'cringe' in message.content.lower():
         await message.channel.send(f"{random.randint(0, 100)}% cringe")
 
+    # grab retard role id
+    role = message.guild.get_role(919700088543137822)
+    if role in message.author.roles:
+        # if author is a confirmed retard, roll .1 chance jingles will remind him
+        if math.floor(random.random()*3) == 1:
+            await message.channel.send(f"<@{message.author.id}> jingles says you're a fucking retard", file=discord.File('./assets/jingles.jpg'))
 
 client.run(TOKEN)
