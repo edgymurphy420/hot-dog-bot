@@ -104,4 +104,30 @@ async def on_message(message):
         if math.floor(random.random()*1001) == 1:
             await message.channel.send(f"<@{message.author.id}> jingles says you're a fucking retard", file=discord.File('./assets/jingles.jpg'))
 
+    # a votekick is initiated
+    if message.content.lower()[0:11] == ',r votekick':
+        # the og users is vote number 1
+        count = 1
+        messageArr = message.content.split();=
+        # if they forgot a username
+        if (len(messageArr) < 3):
+            await message.channel.send("You forgot to say who to kick you fucking idiot.")
+        else:
+            user = message.content.split()[2]
+            # begin votekick countdown
+            await message.channel.send("A votekick countdown has begun for: " + user + ". Type !votekick to vote.")
+            time.sleep(15)
+            # register initiator in table
+            kickTable = [message.author.name];
+            # iterate over all msgs in last 30 secs
+            async for msg in message.channel.history(after = message.created_at):
+                # if msg starts with !votekick
+                if msg.content[0:9] == "!votekick":
+                    # people can only vote once
+                    if msg.author.name not in kickTable:
+                        count+=1
+                        kickTable.append(msg.author.name)
+            # output results of vote
+            await message.channel.send("Kicked user " + user + " with " + str(count) + " votes! ")
+            
 client.run(TOKEN)
