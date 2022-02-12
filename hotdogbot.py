@@ -105,9 +105,12 @@ async def on_message(message):
         if math.floor(random.random()*1001) == 1:
             await message.channel.send(f"<@{message.author.id}> jingles says you're a fucking retard", file=discord.File('./assets/jingles.jpg'))
 
-    if message.channel.name == "cleared-cleared-cleared" and len(message.attachments) > 0:
-        await message.add_reaction("✅")
-        await message.add_reaction("❌")
+    if message.channel.name == "cleared-cleared-cleared":
+        if len(message.attachments) > 0:
+            await message.add_reaction("✅")
+            await message.add_reaction("❌")
+        elif not message.guild.get_role(697270930312790017) in message.author.roles or not message.guild.get_role(936910296558211134) in message.author.roles:
+            await message.delete()
 
     # a votekick is initiated
     if message.content.lower()[0:11] == ',r votekick':
