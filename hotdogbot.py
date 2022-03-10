@@ -123,7 +123,7 @@ async def on_message(message):
         else:
             user = message.content.split()[2]
             # begin votekick countdown
-            await message.channel.send("A votekick countdown has begun for: " + user + ". Type ,votekick to vote.")
+            await message.channel.send("A votekick countdown has begun for: " + user + ". Type ,votekick to vote.", allowed_mentions=discord.AllowedMentions.none())
             time.sleep(15)
             # register initiator in table
             kickTable = [message.author.name]
