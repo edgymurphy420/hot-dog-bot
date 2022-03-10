@@ -136,6 +136,6 @@ async def on_message(message):
                         count+=1
                         kickTable.append(msg.author.name)
             # output results of vote
-            await message.channel.send("Kicked user " + user + " with " + str(count) + " votes! ")
+            await message.channel.send("Kicked user " + user + " with " + str(count) + " votes! ", allowed_mentions=discord.AllowedMentions.none())
             
 client.run(TOKEN)
