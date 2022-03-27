@@ -105,6 +105,9 @@ async def on_message(message):
         if math.floor(random.random()*1001) == 1:
             await message.channel.send(f"<@{message.author.id}> jingles says you're a fucking retard", file=discord.File('./assets/jingles.jpg'))
 
+    if math.floor(random.random()*100000) == 1:
+        await message.channel.send(f"<@{message.author.id}>, you have been visited by the golden jingles, this jingles only appears once in every 100,000 messages.", file=discord.File('./assets/goldjingles.png'))
+
     if message.channel.name == "cleared-cleared-cleared":
         if len(message.attachments) > 0:
             await message.add_reaction("✅")
