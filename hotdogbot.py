@@ -109,7 +109,7 @@ async def on_message(message):
         await message.channel.send(f"<@{message.author.id}>, you have been visited by the golden jingles, this jingles only appears once in every 100,000 messages.", file=discord.File('./assets/goldjingles.png'))
 
     if math.floor(random.random()*1000000) == 1:
-        await message.channel.send(f"<@{message.author.id}>, you have been visited by the mythical jingles, this jingles only appears once in every 1,000,000 messages. @everyone rejoice", file=discord.File('./assets/goldjingles.png'))
+        await message.channel.send(f"<@{message.author.id}>, you have been visited by the mythical jingles, this jingles only appears once in every 1,000,000 messages. @everyone rejoice", file=discord.File('./assets/mythicaljingles.png'))
 
     if message.channel.name == "cleared-cleared-cleared":
         if len(message.attachments) > 0:
