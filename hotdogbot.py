@@ -74,7 +74,7 @@ async def on_message(message):
         if str(message.guild.id) in n_word_usages:
             usage = random.choice(n_word_usages[str(message.guild.id)])
             if len(usage['content']) >= 200:
-                all_usages = [m.start() for m in re.finditer(n_word_regex_pattern, usage['content'])]
+                all_usages = [m.start() for m in re.finditer(n_word_regex_pattern, usage['content'].replace(" ", "").replace("\n", "").replace("\t", ""))]
                 first_usage_index = all_usages[0]
                 start_index = first_usage_index - 100 if first_usage_index - 100 > 0 else 0
                 end_index = first_usage_index + 100 if first_usage_index + 100 < len(usage['content']) else len(usage['content'])
