@@ -195,7 +195,7 @@ async def on_message(message):
             house_strings[house] += str(point_total) + " total points\n" + temp_string
         await message.channel.send("HOUSE CUP RANKINGS:")
         for house_string in house_strings:
-            await message.channel.send(house_strings[house_string])
+            await message.channel.send(house_strings[house_string], allowed_mentions=discord.AllowedMentions.none())
 
     # a votekick is initiated
     if message.content.lower()[0:11] == ',r votekick':
