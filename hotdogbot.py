@@ -119,7 +119,8 @@ async def on_message(message):
 
     # grab retard role id
     role = message.guild.get_role(917583501526724638)
-    if role in message.author.roles:
+    role2 = message.guild.get_role(1042140848449650769)
+    if role in message.author.roles or role2 in message.author.roles:
         # if author is a confirmed retard, roll .1 chance jingles will remind him
         if math.floor(random.random()*1001) == 1:
             await message.channel.send(f"<@{message.author.id}> jingles says you're a fucking retard", file=discord.File('./assets/jingles.jpg'))
