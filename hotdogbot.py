@@ -64,7 +64,7 @@ src_messages = [
 
 @client.event
 async def on_message(message):
-    if message.author == client.user or message.author.bot:
+    if message.author == client.user or message.author.bot or message.author.id == 631068575406358539:
         return
 
     if message.content.lower() == ',r hotdog':
