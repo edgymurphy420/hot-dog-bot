@@ -62,8 +62,18 @@ src_messages = [
     ",r source code"
 ]
 
+balls_regex_pattern = r'https://cdn.discordapp.com/attachments/[0-9]+/[0-9]+/wall.gif'
+balls_regex_pattern2 = r'https://media.discordapp.net/attachments/[0-9]+/[0-9]+/wall.gif'
+balls_regex = re.compile(balls_regex_pattern)
+balls_regex2 = re.compile((balls_regex_pattern2))
+
 @client.event
 async def on_message(message):
+    if message.guild.id == 1083466447164018738:
+        if balls_regex.search(message.content.lower()) or balls_regex2.search(message.content.lower()):
+            await message.channel.send("ball shitters O U T")
+            await message.delete()
+
     if message.author == client.user or message.author.bot or message.author.id == 631068575406358539:
         return
 
