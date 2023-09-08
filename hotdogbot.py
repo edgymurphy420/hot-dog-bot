@@ -13,7 +13,7 @@ from dotenv import load_dotenv
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 
-client = discord.Client()
+client = discord.Client(intents=discord.Intents.all())
 
 n_word_usages = {}
 n_word_file_path = Path("n_words.json")
@@ -22,6 +22,11 @@ if n_word_file_path.is_file():
         n_word_usages = json.load(f)
 n_word_regex_pattern = r'n+[i|1l]+[g6]+[e3]+[r2]+'
 n_word_regex = re.compile(n_word_regex_pattern)
+
+sticker_bans_file_path = Path("sticker_bans.json")
+if sticker_bans_file_path.is_file():
+    with open(sticker_bans_file_path, 'r') as f:
+        sticker_bans = json.load(f)
 
 house_cup_points = {
     "Gryffindor": [],
@@ -65,17 +70,56 @@ src_messages = [
 balls_regex_pattern = r'https://cdn.discordapp.com/attachments/[0-9]+/[0-9]+/wall.gif'
 balls_regex_pattern2 = r'https://media.discordapp.net/attachments/[0-9]+/[0-9]+/wall.gif'
 balls_regex = re.compile(balls_regex_pattern)
-balls_regex2 = re.compile((balls_regex_pattern2))
+balls_regex2 = re.compile(balls_regex_pattern2)
 
 @client.event
 async def on_message(message):
+    if message.author == client.user or message.author.bot or message.author.id == 631068575406358539 or message.guild.id != 873294595037990942:
+        return
+
     if message.guild.id == 1083466447164018738:
         if balls_regex.search(message.content.lower()) or balls_regex2.search(message.content.lower()):
             await message.channel.send("ball shitters O U T")
             await message.delete()
 
-    if message.author == client.user or message.author.bot or message.author.id == 631068575406358539:
-        return
+    if message.stickers:
+        sticker = await message.stickers[0].fetch()
+        if str(message.guild.id) in sticker_bans and sticker.id in sticker_bans[str(message.guild.id)]["bans"]:
+            await message.channel.send("degen stickers O U T")
+            await message.delete()
+        elif str(message.guild.id) in sticker_bans and sticker.guild_id in sticker_bans[str(message.guild.id)]["serverbans"]:
+            await message.channel.send("degen stickers O U T")
+            await message.delete()
+
+    if message.content.lower() == ",r stickerban" and message.author.id == 200019140105207808:
+        msg = await message.channel.fetch_message(message.reference.message_id)
+        sticker = await msg.stickers[0].fetch()
+        if str(message.guild.id) in sticker_bans:
+            sticker_bans[str(message.guild.id)]["bans"].append(sticker.id)
+        else:
+            sticker_bans[str(message.guild.id)] = {
+                "bans": [sticker.id],
+                "serverbans": []
+            }
+        with open(sticker_bans_file_path, 'w', encoding='utf-8') as f:
+            json.dump(sticker_bans, f, ensure_ascii=False, indent=4)
+        await msg.delete()
+        await message.channel.send("b&")
+
+    if message.content.lower() == ",r stickerserverban" and message.author.id == 200019140105207808:
+        msg = await message.channel.fetch_message(message.reference.message_id)
+        sticker = await msg.stickers[0].fetch()
+        if str(message.guild.id) in sticker_bans:
+            sticker_bans[str(message.guild.id)]["serverbans"].append(sticker.guild_id)
+        else:
+            sticker_bans[str(message.guild.id)] = {
+                "bans": [],
+                "serverbans": [sticker.guild_id]
+            }
+        with open(sticker_bans_file_path, 'w', encoding='utf-8') as f:
+            json.dump(sticker_bans, f, ensure_ascii=False, indent=4)
+        await msg.delete()
+        await message.channel.send("server b&")
 
     if message.content.lower() == ',r hotdog':
         response = "https://i.redd.it/w5as70kigbw61.jpg"
