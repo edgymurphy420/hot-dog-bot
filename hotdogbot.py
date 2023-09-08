@@ -74,7 +74,7 @@ balls_regex2 = re.compile(balls_regex_pattern2)
 
 @client.event
 async def on_message(message):
-    if message.author == client.user or message.author.bot or message.author.id == 631068575406358539 or message.guild.id != 873294595037990942:
+    if message.author == client.user or message.author.bot or message.author.id == 631068575406358539:
         return
 
     if message.guild.id == 1083466447164018738:
