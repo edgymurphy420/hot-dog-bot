@@ -72,9 +72,11 @@ balls_regex_pattern2 = r'https://media.discordapp.net/attachments/[0-9]+/[0-9]+/
 balls_regex = re.compile(balls_regex_pattern)
 balls_regex2 = re.compile(balls_regex_pattern2)
 
+banned_users = [631068575406358539, 471516360246034444]
+
 @client.event
 async def on_message(message):
-    if message.author == client.user or message.author.bot or message.author.id == 631068575406358539:
+    if message.author == client.user or message.author.bot or message.author.id in banned_users:
         return
 
     if message.guild.id == 1083466447164018738:
