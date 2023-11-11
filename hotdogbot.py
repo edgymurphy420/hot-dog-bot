@@ -72,7 +72,7 @@ balls_regex_pattern2 = r'https://media.discordapp.net/attachments/[0-9]+/[0-9]+/
 balls_regex = re.compile(balls_regex_pattern)
 balls_regex2 = re.compile(balls_regex_pattern2)
 
-banned_users = [631068575406358539, 471516360246034444]
+banned_users = [631068575406358539]
 
 @client.event
 async def on_message(message):
