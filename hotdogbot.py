@@ -127,6 +127,10 @@ async def on_message(message):
         response = "https://i.redd.it/w5as70kigbw61.jpg"
         await message.channel.send(response)
 
+    if message.content.lower() == ',r longdog':
+        response = "https://media.discordapp.net/attachments/1083466447734452308/1224499186033102868/magik.png?ex=661db6bc&is=660b41bc&hm=50cceaa084117cdb26356511b3f7b86d40c3c0f8fbe4b0a7d9290185517f5638&=&format=webp&quality=lossless"
+        await message.channel.send(response)
+
     if message.content.lower() in src_messages:
         response = "https://github.com/edgymurphy420/hot-dog-bot"
         await message.channel.send(response)
