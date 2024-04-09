@@ -171,9 +171,11 @@ async def on_message(message):
         await message.channel.send(response)
         return
 
-    if message.content.lower() == "1488 based cringe" and message.author.id == 666822401232863242:
-        await message.reply("shut up you inbred monkey")
-        return
+    if message.author.id == 666822401232863242:
+        msg = message.content.lower()
+        if 'based' in msg and 'cringe' in msg and '14' in msg and '88' in msg:
+            await message.reply("shut up you inbred monkey")
+            return
 
     if 'based' in message.content.lower():
         await message.reply(f"{random.randint(0, 100)}% based")
