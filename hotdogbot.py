@@ -184,7 +184,7 @@ async def on_message(message):
         await message.reply(f"{random.randint(0, 100)}% cringe")
 
     # grab retard role id
-    role = message.guild.get_role(917583501526724638)
+    role = message.guild.get_role(1312555255304818800)
     role2 = message.guild.get_role(1042140848449650769)
     if role in message.author.roles or role2 in message.author.roles:
         # if author is a confirmed retard, roll .1 chance jingles will remind him
