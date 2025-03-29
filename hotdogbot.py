@@ -123,6 +123,12 @@ async def on_message(message):
         await msg.delete()
         await message.channel.send("server b&")
 
+    if message.author.id == 190260064722878464:
+        msg = message.content.lower()
+        if "based" in msg or "cringe" in msg or msg == ',r hotdog' or msg == ',r longdog':
+            await message.channel.reply("kill yourself")
+            return
+
     if message.content.lower() == ',r hotdog':
         response = "https://i.redd.it/w5as70kigbw61.jpg"
         await message.channel.send(response)
@@ -196,73 +202,6 @@ async def on_message(message):
 
     if math.floor(random.random()*1000000) == 1:
         await message.channel.send(f"<@{message.author.id}>, you have been visited by the mythical jingles, this jingles only appears once in every 1,000,000 messages. @everyone rejoice", file=discord.File('./assets/mythicaljingles.png'))
-
-    if message.channel.name == "cleared-cleared-cleared":
-        if len(message.attachments) > 0:
-            await message.add_reaction("✅")
-            await message.add_reaction("❌")
-        elif not message.guild.get_role(697270930312790017) in message.author.roles or not message.guild.get_role(936910296558211134) in message.author.roles:
-            await message.delete()
-
-    if message.content.lower().startswith(",hcaward") and message.guild.id == 1041009215059271750 and message.author.id == 300270511559278592:
-        mentioned_users = message.mentions
-        if len(mentioned_users) == 1:
-            mentioned_user = mentioned_users[0]
-            user_house = []
-            for role in mentioned_user.roles:
-                if role.id in house_rank_ids:
-                    user_house.append(house_rank_ids[role.id])
-            if len(user_house) == 0:
-                await message.channel.send("Failed: Mentioned user " + mentioned_user.display_name + " has no house ranks.")
-            elif len(user_house) > 1:
-                await message.channel.send("Failed: Mentioned user " + mentioned_user.display_name + " has multiple house ranks.")
-            else:
-                _, awarded_user, point_value, reason = message.content.split(" ", 3)
-                point_value = float(point_value)
-                if awarded_user and point_value and reason:
-                    if point_value == 0:
-                        await message.channel.send("Failed: You must award a nonzero amount of points")
-                    else:
-                        award = {
-                            "awarded_user": awarded_user,
-                            "point_value": point_value,
-                            "reason": reason,
-                            "time": message.created_at.strftime("%H:%M:%S UTC, on %m/%d/%Y")
-                        }
-                        house_cup_points[user_house[0]].append(award)
-                        with open(house_cup_points_file_path, 'w', encoding='utf-8') as f:
-                            json.dump(house_cup_points, f, ensure_ascii=False, indent=4)
-                        if point_value > 0:
-                            await message.channel.send("Awarded " + str(point_value) + " points to " + mentioned_user.display_name + " of House " + user_house[0] + " for:\n" + reason)
-                        else:
-                            await message.channel.send("Subtracted " + str(point_value) + " points from " + mentioned_user.display_name + " of House " + user_house[0] + " for:\n" + reason)
-                else:
-                    await message.channel.send("Failed: usage is ',hcaward <mention someone here> <point value, nonzero integer> <reason>")
-        else:
-            await message.channel.send("Failed: You must only mention exactly one user in ,hcaward because the discord API is gay and doesn't order the mentions in a message if there are multiple.")
-
-    if message.content.lower().startswith(",hcranks") and message.guild.id == 1041009215059271750:
-        house_strings = {
-            "Gryffindor": "GRYFFINDOR: ",
-            "Slytherin": "SLYTHERIN: ",
-            "Ravenclaw": "RAVENCLAW: ",
-            "Hufflepuff": "HUFFLEPLUFF: "
-        }
-        for house in house_cup_points:
-            counter = 1
-            temp_string = ""
-            point_total = 0.0
-            for award in house_cup_points[house]:
-                point_total += float(award["point_value"])
-                if float(award["point_value"]) > 0:
-                    temp_string += str(counter) + ". Awarded " + str(award["point_value"]) + " points to " + award["awarded_user"] + " for: " + award["reason"] + " (time: " + award["time"] + ")\n"
-                else:
-                    temp_string += str(counter) + ". Subtracted " + str(award["point_value"]) + " points from " + award["awarded_user"] + " for: " + award["reason"] + " (time: " + award["time"] + ")\n"
-                counter += 1
-            house_strings[house] += str(point_total) + " total points\n" + temp_string
-        await message.channel.send("HOUSE CUP RANKINGS:")
-        for house_string in house_strings:
-            await message.channel.send(house_strings[house_string], allowed_mentions=discord.AllowedMentions.none())
 
     # a votekick is initiated
     if message.content.lower()[0:11] == ',r votekick':
