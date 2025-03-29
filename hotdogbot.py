@@ -126,7 +126,7 @@ async def on_message(message):
     if message.author.id == 190260064722878464 or message.author.id == 1246196934683791430:
         msg = message.content.lower()
         if "based" in msg or "cringe" in msg or msg == ',r hotdog' or msg == ',r longdog':
-            await message.channel.reply("kill yourself")
+            await message.reply("kill yourself")
             return
 
     if message.content.lower() == ',r hotdog':
