@@ -123,7 +123,7 @@ async def on_message(message):
         await msg.delete()
         await message.channel.send("server b&")
 
-    if message.author.id == 190260064722878464:
+    if message.author.id == 190260064722878464 or message.author.id == 1246196934683791430:
         msg = message.content.lower()
         if "based" in msg or "cringe" in msg or msg == ',r hotdog' or msg == ',r longdog':
             await message.channel.reply("kill yourself")
