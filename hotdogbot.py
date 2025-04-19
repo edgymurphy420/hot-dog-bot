@@ -185,10 +185,10 @@ async def on_message(message):
             return
 
     if 'based' in message.content.lower():
-        await message.reply(f"{random.randint(0, 100)}% based")
+        await message.reply(f"{random.randint(0, 100),:.2f}% based")
         
     if 'cringe' in message.content.lower():
-        await message.reply(f"{random.randint(0, 100)}% cringe")
+        await message.reply(f"{random.randint(0, 100):.2f}% cringe")
 
     # grab retard role id
     role = message.guild.get_role(1312555255304818800)
